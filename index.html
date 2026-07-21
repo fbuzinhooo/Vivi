@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tajna Strona</title>
+    <style>
+        body { font-family: sans-serif; background-color: #121212; color: white; text-align: center; padding: 20px; }
+        #login-screen { margin-top: 100px; }
+        input { padding: 10px; font-size: 16px; border-radius: 5px; border: none; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; background: #1db954; color: white; border: none; border-radius: 5px; margin-top: 10px; }
+        button:hover { background: #1aa34a; }
+        
+        /* Klasy do przełączania stron */
+        .page { display: none; margin-top: 20px; }
+        .page.active { display: block; }
+        
+        img { max-width: 100%; height: auto; border-radius: 10px; margin-top: 20px; max-height: 400px; }
+        .nav-buttons { margin-top: 30px; }
+        iframe { border-radius: 12px; margin-bottom: 20px; width: 100%; max-width: 600px; }
+    </style>
+</head>
+<body>
+
+    <!-- EKRAN LOGOWANIA -->
+    <div id="login-screen">
+        <h2>Dostęp ograniczony</h2>
+        <input type="password" id="password-input" placeholder="Wpisz hasło">
+        <br>
+        <button onclick="checkPassword()">Wejdź</button>
+    </div>
+
+    <!-- UKRYTA ZAWARTOŚĆ -->
+    <div id="secret-content" style="display: none;">
+        
+        <!-- ========================================== -->
+        <!-- MIEJSCE NR 1: KOD ZE SPOTIFY               -->
+        <!-- Wklej ten kod z "Osadź utwór" ze Spotify   -->
+        <!-- ========================================== -->
+        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/7MXVkk9YMctZqd1Srtv4MB?utm_source=generator&si=6a4bdd0c0a344dd3" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+        <!-- ========================================== -->
+        <!-- MIEJSCE NR 2: ZDJĘCIE I OPIS (STRONA 1)    -->
+        <!-- Zmień nazwę pliku w 'src' na swoją         -->
+        <!-- ========================================== -->
+        <div class="page active" id="page-0">
+            <img src="img1.png" alt="img1">
+            <p>Tutaj wpisz swój piękny opis. Możesz pisać co tylko zechcesz!</p>
+        </div>
+
+        <!-- STRONA 2 (Gdy klikniesz w prawo) -->
+        <div class="page" id="page-1">
+            <img src="img2.png" alt="img2">
+            <p>A to jest druga strona!</p>
+        </div>
+
+        <!-- NAWIGACJA (STRZAŁKI) -->
+        <div class="nav-buttons">
+            <button onclick="changePage(-1)">&#8592; Poprzednia</button>
+            <button onclick="changePage(1)">Następna &#8594;</button>
+        </div>
+    </div>
+
+    <script>
+        // LOGIKA HASŁA I SZYFROWANIA
+        async function checkPassword() {
+            const input = document.getElementById('password-input').value;
+            const encoder = new TextEncoder();
+            const data = encoder.encode(input);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+            // ==========================================
+            // MIEJSCE NR 3: TWÓJ HASH HASŁA
+            // Wklej wygenerowany długi ciąg znaków w cudzysłowach
+            // ==========================================
+            const secretHash = "84a703985573bb34b99160ab3cd53ae86e1cb899f816c626a339a328a3bb76cbd"; 
+
+            if (hashHex === secretHash) {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('secret-content').style.display = 'block';
+            } else {
+                alert("Nieprawidłowe hasło!");
+            }
+        }
+
+        // LOGIKA PRZEŁĄCZANIA STRON
+        let currentPage = 0;
+        const totalPages = 2; // Zmień tę liczbę, jeśli dodasz np. 3 strony
+
+        function changePage(direction) {
+            document.getElementById('page-' + currentPage).classList.remove('active');
+            currentPage = currentPage + direction;
+            if (currentPage < 0) currentPage = totalPages - 1; 
+            if (currentPage >= totalPages) currentPage = 0;    
+            document.getElementById('page-' + currentPage).classList.add('active');
+        }
+    </script>
+</body>
+</html>
