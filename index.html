@@ -2,22 +2,73 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Ten tag odpowiada za to, żeby strona nie była pomniejszona na telefonach -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Tajna Strona</title>
     <style>
-        body { font-family: sans-serif; background-color: #121212; color: white; text-align: center; padding: 20px; }
-        #login-screen { margin-top: 100px; }
-        input { padding: 10px; font-size: 16px; border-radius: 5px; border: none; }
-        button { padding: 10px 20px; font-size: 16px; cursor: pointer; background: #1db954; color: white; border: none; border-radius: 5px; margin-top: 10px; }
+        * { box-sizing: border-box; }
+        body { 
+            font-family: sans-serif; 
+            background-color: #121212; 
+            color: white; 
+            text-align: center; 
+            padding: 15px; 
+            margin: 0;
+        }
+        #login-screen { margin-top: 20vh; }
+        
+        /* Wygląd dostosowany do palców na ekranach dotykowych */
+        input { 
+            padding: 15px; 
+            font-size: 16px; 
+            border-radius: 8px; 
+            border: none; 
+            width: 100%; 
+            max-width: 300px;
+        }
+        button { 
+            padding: 15px 25px; 
+            font-size: 16px; 
+            cursor: pointer; 
+            background: #1db954; 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            margin-top: 15px; 
+            width: 100%; 
+            max-width: 300px;
+        }
         button:hover { background: #1aa34a; }
         
-        /* Klasy do przełączania stron */
+        #secret-content {
+            width: 100%;
+            max-width: 600px; /* Maksymalna szerokość na komputerze */
+            margin: 0 auto;   /* Wyśrodkowanie */
+        }
+
         .page { display: none; margin-top: 20px; }
         .page.active { display: block; }
         
-        img { max-width: 100%; height: auto; border-radius: 10px; margin-top: 20px; max-height: 400px; }
-        .nav-buttons { margin-top: 30px; }
-        iframe { border-radius: 12px; margin-bottom: 20px; width: 100%; max-width: 600px; }
+        /* Zdjęcia nie wyjdą poza ekran na telefonie */
+        img { 
+            width: 100%; 
+            height: auto; 
+            border-radius: 12px; 
+            margin-top: 15px; 
+            max-height: 50vh; 
+            object-fit: cover;
+        }
+        
+        .nav-buttons { 
+            display: flex; 
+            justify-content: space-between; 
+            gap: 10px; 
+            margin-top: 30px; 
+        }
+        .nav-buttons button { margin-top: 0; width: 48%; }
+        
+        iframe { border-radius: 12px; margin-bottom: 15px; width: 100%; }
+        p { font-size: 16px; line-height: 1.5; padding: 0 10px; }
     </style>
 </head>
 <body>
@@ -33,25 +84,31 @@
     <!-- UKRYTA ZAWARTOŚĆ -->
     <div id="secret-content" style="display: none;">
         
-        <!-- ========================================== -->
-        <!-- MIEJSCE NR 1: KOD ZE SPOTIFY               -->
-        <!-- Wklej ten kod z "Osadź utwór" ze Spotify   -->
-        <!-- ========================================== -->
-        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/7MXVkk9YMctZqd1Srtv4MB?utm_source=generator&si=6a4bdd0c0a344dd3" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-
-        <!-- ========================================== -->
-        <!-- MIEJSCE NR 2: ZDJĘCIE I OPIS (STRONA 1)    -->
-        <!-- Zmień nazwę pliku w 'src' na swoją         -->
-        <!-- ========================================== -->
+        <!-- ================= STRONA 1 ================= -->
         <div class="page active" id="page-0">
+            <!-- Muzyka 1 -->
+            <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/7MXVkk9YMctZqd1Srtv4MB?utm_source=generator&si=6a4bdd0c0a344dd3" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <!-- Zdjecie i tekst 1 -->
             <img src="img1.png" alt="img1">
             <p>Tutaj wpisz swój piękny opis. Możesz pisać co tylko zechcesz!</p>
         </div>
 
-        <!-- STRONA 2 (Gdy klikniesz w prawo) -->
+        <!-- ================= STRONA 2 ================= -->
         <div class="page" id="page-1">
-            <img src="img2.png" alt="img2">
-            <p>A to jest druga strona!</p>
+            <!-- Muzyka 2 (zmień link na inną piosenkę) -->
+            <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/1koe87P9GUj9jzitVVvi0Q?utm_source=generator&si=32bf796b68974eac" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <!-- Zdjecie i tekst 2 -->
+            <img src="img15.png" alt="img15">
+            <p>A to jest druga strona z inną muzyką!</p>
+        </div>
+
+        <!-- ================= STRONA 3 ================= -->
+        <div class="page" id="page-2">
+            <!-- Muzyka 3 (zmień link na inną piosenkę) -->
+            <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/0upFohXrGxIIAjyaJmCkMU?utm_source=generator&si=8eb59c05cd8749dc" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <!-- Zdjecie i tekst 3 -->
+            <img src="img21.jpg" alt="img21">
+            <p>A to jest druga strona z inną muzyką!</p>
         </div>
 
         <!-- NAWIGACJA (STRZAŁKI) -->
@@ -62,7 +119,7 @@
     </div>
 
     <script>
-        // LOGIKA HASŁA I SZYFROWANIA
+        // --- LOGIKA HASŁA ---
         async function checkPassword() {
             const input = document.getElementById('password-input').value;
             const encoder = new TextEncoder();
@@ -71,12 +128,8 @@
             const hashArray = Array.from(new Uint8Array(hashBuffer));
             const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
-            // ==========================================
-            // MIEJSCE NR 3: TWÓJ HASH HASŁA
-            // Wklej wygenerowany długi ciąg znaków w cudzysłowach
-            // ==========================================
-            const secretHash = "84a703985573bb34b99160ab3cd53ae86e1cb899f816c626a339a328a3bb76cb";
-	    //const secretHash = "7e6e9877fff0dbcc576df15fd6e6de65a95d6dce6ced8fc47c4cf9dba3484195";
+            // TU WKLEJ PONOWNIE SWÓJ HASH
+            const secretHash = "84a703985573bb34b99160ab3cd53ae86e1cb899f816c626a339a328a3bb76cb"; 
 
             if (hashHex === secretHash) {
                 document.getElementById('login-screen').style.display = 'none';
@@ -86,15 +139,27 @@
             }
         }
 
-        // LOGIKA PRZEŁĄCZANIA STRON
+        // --- LOGIKA PRZEŁĄCZANIA STRON I MUZYKI ---
         let currentPage = 0;
-        const totalPages = 2; // Zmień tę liczbę, jeśli dodasz np. 3 strony
+        const totalPages = 3; // Zmień na 3, 4 itd. w zależności od ilości stron
 
         function changePage(direction) {
+            // Zatrzymywanie muzyki - "odświeżamy" wszystkie odtwarzacze w tle
+            const iframes = document.querySelectorAll('iframe');
+            iframes.forEach(iframe => {
+                let temp = iframe.src;
+                iframe.src = temp;
+            });
+
+            // Ukrywamy obecną stronę
             document.getElementById('page-' + currentPage).classList.remove('active');
+            
+            // Przeliczamy strony
             currentPage = currentPage + direction;
             if (currentPage < 0) currentPage = totalPages - 1; 
             if (currentPage >= totalPages) currentPage = 0;    
+            
+            // Pokazujemy nową stronę
             document.getElementById('page-' + currentPage).classList.add('active');
         }
     </script>
