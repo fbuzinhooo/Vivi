@@ -49,14 +49,14 @@
         .page { display: none; margin-top: 20px; }
         .page.active { display: block; }
         
-        /* Zdjęcia nie wyjdą poza ekran na telefonie */
+/* Zaktualizowane zdjęcia, żeby nic nie było ucięte */
         img { 
-            width: 100%; 
+            max-width: 100%; 
             height: auto; 
             border-radius: 12px; 
             margin-top: 15px; 
-            max-height: 50vh; 
-            object-fit: cover;
+            max-height: 60vh; 
+            object-fit: contain;
         }
         
         .nav-buttons { 
